@@ -9,6 +9,9 @@ target_include_directories(ApiContracts INTERFACE
         $<BUILD_INTERFACE:${hana_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/YandexHome>)
 target_link_libraries(ApiContracts INTERFACE Qt6::Core)
+# Public model headers expand the variadic JSON_* macros, so SDK consumers
+# built with MSVC need the conforming preprocessor too.
+target_compile_options(ApiContracts INTERFACE $<$<CXX_COMPILER_ID:MSVC>:/Zc:preprocessor>)
 
 add_library(YandexApiAdapter SHARED
         YandexHomeApi.cpp

@@ -9,6 +9,12 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+if(MSVC)
+  # The JSON_* serialization macros need the conforming preprocessor for
+  # __VA_ARGS__ expansion; sources contain UTF-8 literals.
+  add_compile_options(/Zc:preprocessor /utf-8)
+endif()
+
 option(YH_ENABLE_PCH "Use precompiled headers for C++ targets" ON)
 option(YH_ENABLE_PACKAGING "Configure the native release installer or archive" OFF)
 

@@ -16,6 +16,10 @@
 !/cmake/CheckConsoleInstall.cmake.in
 !/cmake/QHotkey.cmake
 /.idea
+/.vs
+/.vscode
+/out
+CMakeUserPresets.json
 /scratches
 /resources/auth/secrets.json
 /rest.local.json
