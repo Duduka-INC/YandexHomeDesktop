@@ -15,6 +15,16 @@ Item {
     anchors.fill: parent
   }
 
+  UI.Shadow {
+    anchors.fill: background
+    source: background
+    horizontalOffset: 0
+    verticalOffset: 2
+    radius: 6
+    samples: 16
+    color: themes.shadowColor
+  }
+
   Column {
     id: content
     anchors.centerIn: parent
@@ -40,15 +50,5 @@ Item {
       anchors.horizontalCenter: parent.horizontalCenter
       onClicked: root.signInRequested()
     }
-  }
-
-  UI.Shadow {
-    anchors.fill: background
-    source: background
-    horizontalOffset: 0
-    verticalOffset: 2
-    radius: 6
-    samples: 16
-    color: themes.shadowColor
   }
 }
