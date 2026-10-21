@@ -1190,12 +1190,17 @@
         },
         {
           "name": "SharedControls::test_actionCursors",
-          "description": "Hover actual buttons, switches, tabs, links, tiles, keybinds and comboboxes and verify the window shows a pointing hand.",
+          "description": "Hover actual buttons, switches, tabs, links, copy links, tiles, keybinds and comboboxes and verify the window shows a pointing hand.",
           "source": "tests/qml/tst_SharedControls.qml"
         },
         {
           "name": "SharedControls::test_comboBoxTextAndInteraction",
           "description": "Keep long combobox labels on one line within padded bounds in both themes while preserving pointer and keyboard selection.",
+          "source": "tests/qml/tst_SharedControls.qml"
+        },
+        {
+          "name": "SharedControls::test_messagePaneCopiesValue",
+          "description": "Click the message pane copy link, paste the copied value from the clipboard, confirm the temporary copied label, and hide the link without a value.",
           "source": "tests/qml/tst_SharedControls.qml"
         },
         {

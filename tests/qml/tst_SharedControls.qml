@@ -24,6 +24,15 @@ TestCase {
   Component { id: topBar; Components.TopBar { householdName: "Home" } }
   Component { id: household; Components.HouseholdDelegate { width: 250; title: "Home" } }
   Component { id: combo; UI.MyComboBox { model: ["Short", "A very long option that must stay on one line", "Тёмная"] } }
+  Component {
+    id: messagePane
+    UI.MessageActionsPane {
+      width: 300; height: 300
+      message: "Failure"; detail: "Code: 80010001"
+      copyValue: "80010001"; copyText: "Copy code"; copiedText: "Copied"
+    }
+  }
+  Component { id: pasteTarget; TextEdit {} }
 
   SignalSpy { id: selectedSpy; signalName: "activated" }
 
@@ -60,7 +69,8 @@ TestCase {
       { tag: "scenarios menu", control: topBar, child: "scenariosTab" },
       { tag: "settings menu", control: topBar, child: "settingsTab" },
       { tag: "home menu item", control: household },
-      { tag: "combobox", control: combo }
+      { tag: "combobox", control: combo },
+      { tag: "copy link", control: messagePane, child: "copyAction" }
     ];
   }
 
@@ -111,5 +121,24 @@ TestCase {
     compare(picker.currentIndex, 1);
     compare(selectedSpy.count, 2);
     compare(selectedSpy.signalArguments[1][0], 1);
+  }
+
+  function test_messagePaneCopiesValue() {
+    const pane = createTemporaryObject(messagePane, testCase, { x: 20, y: 20 });
+    verify(pane !== null);
+    const copyAction = findChild(pane, "copyAction");
+    verify(copyAction !== null);
+    tryCompare(copyAction, "visible", true);
+    compare(copyAction.text, "Copy code");
+
+    mouseClick(copyAction);
+    compare(copyAction.text, "Copied");
+    const target = createTemporaryObject(pasteTarget, testCase);
+    target.paste();
+    compare(target.text, "80010001");
+    tryCompare(copyAction, "text", "Copy code", 3000);
+
+    pane.copyValue = "";
+    verify(!copyAction.visible);
   }
 }

@@ -97,8 +97,9 @@ TrayWindow {
     }
 
     function onInitializationFailed() {
-      console.log("App is broken!");
-      Qt.quit();
+      // Setup errors (invalid OAuth config, busy callback port) keep the
+      // window open and show their diagnostic code instead of quitting.
+      router.navigateTo("error");
     }
 
     function onAuthorizationCanceled() {
