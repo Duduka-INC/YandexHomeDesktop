@@ -2082,6 +2082,16 @@ Email: %2
         <translation>Yandex Home Desktop</translation>
     </message>
     <message>
+        <location filename="../src/qml/Main.qml" line="66"/>
+        <source>Открыть</source>
+        <translation>Open</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/Main.qml" line="73"/>
+        <source>Выйти</source>
+        <translation>Quit</translation>
+    </message>
+    <message>
         <source>Кадр/с: %1</source>
         <translation type="vanished">FPS: %1</translation>
     </message>

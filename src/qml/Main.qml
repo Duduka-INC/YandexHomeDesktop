@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import Qt.labs.platform
+import Qt.labs.platform as Platform
 import Qt5Compat.GraphicalEffects
 import YandexHomeDesktop.Pages
 import YandexHomeDesktop.Ui
@@ -52,14 +52,41 @@ TrayWindow {
     }
   }
 
-  SystemTrayIcon {
+  Platform.SystemTrayIcon {
+    id: trayIcon
     visible: settings.trayModeEnabled
     icon.name: "Yandex Home Desktop"
     icon.source: "qrc:/images/icon.png"
 
+    // The context menu is the only way to quit while the frameless tray window is hidden.
+    menu: Platform.Menu {
+      id: trayMenu
+
+      Platform.MenuItem {
+        text: qsTr("Открыть")
+        onTriggered: platformService.ShowWindow(trayIcon.geometry)
+      }
+
+      Platform.MenuSeparator {}
+
+      Platform.MenuItem {
+        text: qsTr("Выйти")
+        onTriggered: Qt.quit()
+      }
+    }
+
     onActivated: function(reason) {
-      console.log("Position:", geometry.x, geometry.y);
-      platformService.ShowWindow(geometry);
+      // The Windows tray only shows native menus and ignores the widget-based
+      // fallback, so open it explicitly. Other platforms show it themselves.
+      if (reason === Platform.SystemTrayIcon.Context && Qt.platform.os === "windows") {
+        trayMenu.open();
+        return;
+      }
+      // Right click opens the menu; only primary clicks toggle the window.
+      if (reason === Platform.SystemTrayIcon.Trigger
+          || reason === Platform.SystemTrayIcon.DoubleClick) {
+        platformService.ShowWindow(geometry);
+      }
     }
   }
 
