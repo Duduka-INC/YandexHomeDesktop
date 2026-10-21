@@ -1855,17 +1855,36 @@ your devices</translation>
 <context>
     <name>ErrorPage</name>
     <message>
-        <location filename="../src/qml/pages/ErrorPage.qml" line="7"/>
         <source>Что-то пошло не так! %1</source>
-        <translation>Something went wrong! %1</translation>
+        <translation type="vanished">Something went wrong! %1</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/ErrorPage.qml" line="8"/>
+        <location filename="../src/qml/pages/ErrorPage.qml" line="9"/>
+        <source>Что-то пошло не так!</source>
+        <translation>Something went wrong!</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/ErrorPage.qml" line="10"/>
+        <source>Код ошибки: %1</source>
+        <translation>Error code: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/ErrorPage.qml" line="13"/>
+        <source>Скопировать код</source>
+        <translation>Copy code</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/ErrorPage.qml" line="14"/>
+        <source>Скопировано</source>
+        <translation>Copied</translation>
+    </message>
+    <message>
+        <location filename="../src/qml/pages/ErrorPage.qml" line="15"/>
         <source>Попробовать ещё раз</source>
         <translation>Try again</translation>
     </message>
     <message>
-        <location filename="../src/qml/pages/ErrorPage.qml" line="9"/>
+        <location filename="../src/qml/pages/ErrorPage.qml" line="16"/>
         <source>Выйти из аккаунта</source>
         <translation>Sign out</translation>
     </message>

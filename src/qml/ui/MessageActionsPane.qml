@@ -10,8 +10,29 @@ Item {
   property string primaryButtonText
   property string secondaryButtonText
   property bool equalButtonWidths: false
+  // Optional value copied to the clipboard by the link below the messages.
+  property string copyValue
+  property string copyText
+  property string copiedText
   signal primaryClicked()
   signal secondaryClicked()
+
+  function copyToClipboard() {
+    clipboardBuffer.text = root.copyValue;
+    clipboardBuffer.selectAll();
+    clipboardBuffer.copy();
+    copiedTimer.restart();
+  }
+
+  TextEdit {
+    id: clipboardBuffer
+    visible: false
+  }
+
+  Timer {
+    id: copiedTimer
+    interval: 1500
+  }
 
   Column {
     id: content
@@ -38,6 +59,16 @@ Item {
         pixelSize: root.detailPixelSize
         wrapWidth: Math.max(0, root.width - 32)
         anchors.horizontalCenter: parent.horizontalCenter
+      }
+
+      UI.LinkLabel {
+        objectName: "copyAction"
+        visible: root.copyValue.length !== 0
+        text: copiedTimer.running ? root.copiedText : root.copyText
+        color: themes.accent
+        font.pixelSize: root.detailPixelSize
+        anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: root.copyToClipboard()
       }
     }
 
