@@ -55,6 +55,8 @@ declared dependency without editing downloaded sources.
 Windows builds copy the applications' declared Qt DLLs and the selected MinGW
 compiler's runtime beside the executables before CTest. This gives the build-tree
 apps and tests a matching runtime even when other tools add DLLs to `PATH`.
+A generated build-tree `qt.conf` points those executables at the selected kit's
+plugins and QML imports, so local launches need no `QT_PLUGIN_PATH`.
 QML tests import the generated modules from the build directory and Qt modules
 from the selected kit; manually copying QML sources beside an executable is not
 part of the build. Offscreen QML tests set `QT_QPA_FONTDIR` to the committed

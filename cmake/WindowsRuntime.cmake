@@ -44,4 +44,8 @@ if(_runtime_targets)
     DEPENDS ${_runtime_targets}
     COMMENT "Deploying matching Qt and compiler DLLs for build-tree executables"
     VERBATIM)
+  # Qt resolves plugins and QML imports relative to the Qt6Core.dll it loads.
+  # With that DLL copied beside the executables, point them back at the kit.
+  file(GENERATE OUTPUT "${_runtime_directory}/qt.conf"
+    CONTENT "[Paths]\nPrefix = ${QT6_INSTALL_PREFIX}\n")
 endif()
