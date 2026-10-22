@@ -49,6 +49,10 @@ endif()
 if(TARGET YandexHomeShortcuts)
   add_dependencies(appYandexHomeDesktop YandexHomeShortcuts)
 endif()
+# The QML module plugins are loaded at runtime rather than linked, so building
+# only the app target (IDE launch, just run) must still produce them.
+add_dependencies(appYandexHomeDesktop YandexHomeDesktopUiplugin
+  YandexHomeDesktopPagesplugin YandexHomeDesktopComponentsplugin)
 
 qt_add_qml_module(appYandexHomeDesktop
   URI YandexHomeDesktop
